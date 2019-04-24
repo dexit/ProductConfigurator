@@ -1,18 +1,52 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>My logged in state: {{loggedin}}</p>
+    <p>Ik ben ingelogd? {{ ingelogd }}</p>
+    <p>Using the global way of mapState {{ account.auth }} en {{ account.showLoginForm }}</p>
+    <button @click="showLogin">Show Login</button>
+    <hr>
+    <div id="configurator">
+      <p>Currently we have {{ products.length }} product{{products.length > 1 ? 's' : ''}}</p>
+      <ul>
+        <li v-for="product in products" :key="product.id">{{ product.id}}</li>
+      </ul>
+      <p>Current price: &euro; {{ price }}</p>
+      <button @click="addProduct">Add product</button><button @click="removeProduct(0)">Remove product</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: {},
+  computed: {
+    ...mapState('account', {
+      loggedin: state => state.auth,
+      ingelogd: 'auth',
+    }),
+    ...mapState(['account']), // makes this.account available as a whole. This works since it is a toplevel
+    ...mapState('configurator', {
+      products: 'products',
+      price: 'price'
+    })
+  },
+  methods: {
+    ...mapActions('account', [
+      'showLogin',
+    ]),
+    ...mapActions('configurator', [
+      'addProduct',
+      'removeProduct',
+      'updatePrice'
+    ]),
+  },
+  mounted() {
+    // updatePrice to have a correct baseprice when we start
+    this.updatePrice()
+  },
 }
 </script>
 

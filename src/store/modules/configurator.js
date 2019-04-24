@@ -16,9 +16,11 @@ const state = {
 const actions = {
     addProduct({commit}) {
         commit('addProductMut')
+        commit('updatePriceMut')
     },
     removeProduct({commit}, index) {
         commit('removeProductMut', index)
+        commit('updatePriceMut')
     },
     addToCart({commit}) {
         commit('addToCartMut')
