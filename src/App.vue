@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo_plint-sites.jpg">
+    <img alt="logo" src="./assets/logo_plint-sites.jpg">
     <div id="login-cntr">
       <p>I am {{ loggedin ? '' : 'not ' }}logged in</p>
       <button v-if="!loggedin" @click="toggleLogin">{{ showForm ? 'Hide' : 'Show' }} Login</button>
@@ -96,6 +96,10 @@ p {
 
 i {
   font-size: 13px;
+}
+
+img {
+  max-width: 750px;
 }
 
 button {
