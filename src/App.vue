@@ -2,18 +2,29 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo_plint-sites.jpg">
     <div id="login-cntr">
-      <p>My logged in state: {{loggedin}}</p>
-      <p>Ik ben ingelogd? {{ ingelogd }}</p>
-      <p>Using the global way of mapState {{ account.auth }} en {{ account.showLoginForm }}</p>
-      <button @click="showLogin">Show Login</button>
+      <p>I am {{ loggedin ? '' : 'not ' }}logged in</p>
+      <button v-if="!loggedin" @click="toggleLogin">{{ showForm ? 'Hide' : 'Show' }} Login</button>
+      <button v-else @click="logout">Logout</button>
+
+      <div id="login-form" v-if="showForm">
+        <i>Fill and submit the form</i>
+        <br>
+        <input type="text" placeholder="Your email">
+        <br>
+        <input type="password" placeholder="Password">
+        <br>
+        <button @click="attemptLogin">Sign in</button>
+      </div>
     </div>
     
     <div id="configurator">
       <p>Currently we have {{ products.length }} product{{products.length > 1 ? 's' : ''}}</p>
       <ul>
-        <li v-for="product in products" :key="product.id">{{ product.id}}</li>
+        <li v-for="product in products" :key="product.id">
+          <b>{{ product.amount }}x</b> {{ product.id}}
+        </li>
       </ul>
-      <p>Current price: &euro; {{ price }}</p>
+      <p>Total price: &euro; {{ price }}</p>
       <button @click="addProduct">Add product</button><button @click="removeProduct(0)">Remove product</button>
     </div>
   </div>
@@ -26,10 +37,9 @@ export default {
   components: {},
   computed: {
     ...mapState('account', {
-      loggedin: state => state.auth,
-      ingelogd: 'auth',
+      loggedin: 'auth',
+      showForm: 'showLoginForm',
     }),
-    ...mapState(['account']), // makes this.account available as a whole. This works since it is a toplevel
     ...mapState('configurator', {
       products: 'products',
       price: 'price'
@@ -38,12 +48,22 @@ export default {
   methods: {
     ...mapActions('account', [
       'showLogin',
+      'hideLogin',
+      'attemptLogin',
+      'logout',
     ]),
     ...mapActions('configurator', [
       'addProduct',
       'removeProduct',
       'updatePrice'
     ]),
+    toggleLogin() {
+      if (this.showForm) {
+        this.hideLogin()
+      } else {
+        this.showLogin()
+      }
+    },
   },
   mounted() {
     // updatePrice to have a correct baseprice when we start
@@ -74,6 +94,10 @@ p {
   margin: 0 0 10px 0;
 }
 
+i {
+  font-size: 13px;
+}
+
 button {
   width: 150px;
   padding: 6px 18px;
@@ -81,11 +105,28 @@ button {
   background: #1da025;
   color: white;
   font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid greenyellow;
+  }
 }
 
 #login-cntr {
   background: #e2e1f9;
   padding: 20px 0;
+
+  #login-form {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    input {
+      width: 150px;
+      height: 28px;
+      padding-left: 5px;
+      box-sizing: border-box;
+      margin-bottom: 5px;
+    }
+  }
 }
 
 #configurator {
