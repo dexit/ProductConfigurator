@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Price &euro; {{ price }}
+    <div id="price">
+        Price: &euro; {{ price }}
     </div>
 </template>
 
@@ -12,5 +12,8 @@
 </script>
 
 <style lang="less" scoped>
-
+    #price {
+        font-size: 20px;
+        font-weight: bold;
+    }
 </style>
