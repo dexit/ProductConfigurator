@@ -2,22 +2,22 @@
     <div class="single-product">
         <div class="row">
             <div class="col-md-12">
-                <button class="remove-product-button pull-right"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                <button class="remove-product-button pull-right" @click="removeProduct"><span class="glyphicon glyphicon-remove-circle"></span></button>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-6">
-                <CardChooseShape v-model="config.shape" @input-changed="updateParent" />
-                <CardChoosePapersize v-model="config.size" @input-changed="updateParent" />
+                <CardChooseShape v-model="config.shape" @changed="updateParent" />
+                <CardChoosePapersize v-model="config.size" @chosen="updateParent" />
                 <CardChooseAmount v-model="config.amount" @input-changed="updateParent"/>
-                <CardChoosePaperquality v-model="config.quality" @input-changed="updateParent" />
+                <CardChoosePaperquality v-model="config.quality" @chosen="updateParent" :id="id"/>
             </div>
             <div class="col-md-6">
-                <CardChooseHeadline v-model="config.heading" @input-changed="updateParent" />
-                <CardChooseMaintext v-model="config.body" @input-changed="updateParent" />
+                <CardChooseHeadline v-model="config.heading" @input="updateParent" />
+                <CardChooseMaintext v-model="config.body" @input="updateParent" />
 
-                <button class="btn-link pull-right">Clear configuration</button>
+                <button class="btn-link pull-right" @click="resetProduct">Clear configuration</button>
             </div>
         </div>
         
@@ -44,12 +44,18 @@
         model: {
             prop: 'config',
         },
-        props: ['config'],
+        props: ['id', 'config'],
         computed: {},
         methods: {
             updateParent() {
                 this.$emit('product-updated')
-            }
+            },
+            resetProduct() {
+                this.$emit('reset-product', this.id)
+            },
+            removeProduct() {
+                this.$emit('remove-product', this.id)
+            },
         },
     }
 </script>
@@ -69,6 +75,11 @@
             font-size: 25px;
             color: #aaa;
         }
+
+        &:hover {
+            outline: none;
+            color: #878787;
+        }
     }
 
     .btn-link {
@@ -77,6 +88,11 @@
         color: #FF9900;
         text-decoration: underline;
         font-size: 14px;
+
+        &:hover {
+            outline: none;
+            color: #cc7a00;
+        }
     }
 }
 </style>

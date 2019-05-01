@@ -3,10 +3,10 @@
         <label for="quality">Paperquality</label>
         <div>
             <div class="custom-input inline">
-                <input id="normal" type="radio" value="normal" :checked="quality === 'normal'" @change="chosen"><label for="normal">Normal</label>
+                <input :id="normalId" type="radio" value="normal" :checked="quality === 'normal'" @change="chosen"><label :for="normalId">Normal</label>
             </div>
             <div class="custom-input inline">
-                <input id="extra" type="radio" value="extra" :checked="quality === 'extra'" @change="chosen"><label for="extra">Extra</label>
+                <input :id="extraId" type="radio" value="extra" :checked="quality === 'extra'" @change="chosen"><label :for="extraId">Extra</label>
             </div>
         </div>
     </div>
@@ -19,7 +19,15 @@
             prop: 'quality',
             event: 'chosen'
         },
-        props: ['quality'],
+        props: ['id', 'quality'],
+        computed: {
+            normalId() {
+                return `normal_${this.id}`
+            },
+            extraId() {
+                return `extra_${this.id}`
+            },
+        },
         methods: {
             chosen(e) {
                 this.$emit('chosen', e.target.value)
@@ -29,11 +37,13 @@
 </script>
 
 <style lang="less" scoped>
-input[type=radio] {}
-
 input[type=radio] + label {
     margin-left: 5px;
     margin-right: 20px;
     font-weight: normal;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 </style>

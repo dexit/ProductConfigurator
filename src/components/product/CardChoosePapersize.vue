@@ -19,7 +19,6 @@
         props: ['size'],
         methods: {
             chosen(e) {
-                console.log('new size selected: ', e.target.value)
                 this.$emit('chosen', e.target.value)
             },
         },

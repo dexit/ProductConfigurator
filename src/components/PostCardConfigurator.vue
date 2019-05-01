@@ -15,6 +15,9 @@
                 <ProductList 
                     :products="products"
                     @update-price="updatePrice"
+                    @reset-product="resetProduct"
+                    @remove-product="removeProduct"
+                    @add-product="addProduct"
                 />
                 
                 <div class="row">
@@ -53,7 +56,8 @@
             ...mapActions('configurator', [
                 'addProduct',
                 'removeProduct',
-                'updatePrice'
+                'updatePrice',
+                'resetProduct'
             ])
         },
         mounted() {

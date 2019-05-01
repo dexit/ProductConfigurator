@@ -1,6 +1,6 @@
 <template>
     <div id="price">
-        Price: &euro; {{ price }}
+        Price: &euro; {{ price.toFixed(2) }}
     </div>
 </template>
 

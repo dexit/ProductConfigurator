@@ -1,12 +1,26 @@
 <template>
     <div id="add-cart">
-        <button class="btn btn-secondary">+ Add another card</button>
+        <button class="btn btn-secondary" @click="add" v-text="buttonText"></button>
     </div>
 </template>
 
 <script>
     export default {
         name: 'addProduct',
+        props: ['products'],
+        computed: {
+            buttonText() {
+                if (this.products.length > 0) {
+                    return '+ Add another product'
+                }
+                return '+ Add a product'
+            },
+        },
+        methods: {
+            add() {
+                this.$emit('add-product')
+            },
+        },
     }
 </script>
 

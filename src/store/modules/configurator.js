@@ -30,23 +30,17 @@ const actions = {
     updatePrice({commit}) {
         commit('updatePriceMut')
     },
+    resetProduct({commit}, productId) {
+        commit('resetProductMut', productId)
+    }
 }
 const mutations = {
-    addProductMut(state) {
-        state.products.push({
-            id: uuidv4(),
-            config: {
-                heading: '',
-                body: '',
-                amount: 1,
-                shape: 'rect',
-                size: 'a4',
-                quality: 'normal',
-            }
-        })
+    addProductMut({products}) {
+        products.push(createNewProduct())
     },
-    removeProductMut(state, index) {
-        state.products.splice(index, 1)
+    removeProductMut({products}, productId) {
+        const index = products.findIndex(prod => prod.id === productId)
+        products.splice(index, 1)
     },
     addToCartMut(state) {
         // reset state?
@@ -54,7 +48,12 @@ const mutations = {
     },
     updatePriceMut(state) {
         state.price = state.products.reduce((previous, product) => previous + productPrice(product), 0)
-    }
+    },
+    resetProductMut({ products }, productId) {
+        const index = products.findIndex(prod => prod.id === productId)
+        const newProduct = createNewProduct()
+        products.splice(index, 1, newProduct)
+    },
 }
 
 export default {
@@ -71,8 +70,23 @@ const productPrice = ({config}) => {
     } else if (config.size === 'a6') {
         price = 0.75
     }
+    price += 0.01 * config.heading.length // 1 cent per letter in headline
+    price += 0.02 * config.body.split(' ').length // 2 cent per word in body
     if (config.quality === 'extra') {
         price *= 1.25
     }
-    return price * config.amount
+    price *= config.amount
+    return price
 }
+
+const createNewProduct = () => ({
+    id: uuidv4(),
+    config: {
+        heading: '',
+        body:  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+        amount: 10,
+        shape: 'rect',
+        size: 'a4',
+        quality: 'normal',
+    }
+})

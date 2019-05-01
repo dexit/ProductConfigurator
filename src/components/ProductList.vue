@@ -2,13 +2,24 @@
     <div>
         <div class="row">
             <div class="col-md-12">
-                <SingleProduct v-for="product in products" :key="product.id" v-model="product.config" @product-updated="notifyParent"/>
+                <SingleProduct 
+                    v-for="product in products" 
+                    :key="product.id" 
+                    v-model="product.config"
+                    :id="product.id" 
+                    @product-updated="notifyParent"
+                    @reset-product="resetProduct"
+                    @remove-product="removeProduct"
+                />
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-12">
-                <AddProduct />
+                <AddProduct 
+                    :products="products"
+                    @add-product="addProduct"
+                />
             </div>
         </div>
         
@@ -28,6 +39,15 @@
         methods: {
             notifyParent() {
                 this.$emit('update-price')
+            },
+            resetProduct(id) {
+                this.$emit('reset-product', id)
+            },
+            removeProduct(id) {
+                this.$emit('remove-product', id)
+            },
+            addProduct() {
+                this.$emit('add-product')
             },
         },
     }
