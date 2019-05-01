@@ -3,10 +3,10 @@
         <label for="quality">Paperquality</label>
         <div>
             <div class="custom-input inline">
-                <input id="normal" type="radio" value="normal" v-model="quality"><label for="normal">Normal</label>
+                <input id="normal" type="radio" value="normal" :checked="quality === 'normal'" @change="chosen"><label for="normal">Normal</label>
             </div>
             <div class="custom-input inline">
-                <input id="extra" type="radio" value="extra" v-model="quality"><label for="extra">Extra</label>
+                <input id="extra" type="radio" value="extra" :checked="quality === 'extra'" @change="chosen"><label for="extra">Extra</label>
             </div>
         </div>
     </div>
@@ -15,11 +15,15 @@
 <script>
     export default {
         name: 'CardChoosePaperquality',
-        props: [],
-        data () {
-            return {
-                quality: 'normal'
-            }
+        model: {
+            prop: 'quality',
+            event: 'chosen'
+        },
+        props: ['quality'],
+        methods: {
+            chosen(e) {
+                this.$emit('chosen', e.target.value)
+            },
         },
     }
 </script>

@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-md-12">
-                <SingleProduct v-for="product in products" :key="product.id" :product="product"/>
+                <SingleProduct v-for="product in products" :key="product.id" v-model="product.config" @product-updated="notifyParent"/>
             </div>
         </div>
         
@@ -24,6 +24,11 @@
         components: {
             SingleProduct,
             AddProduct,
+        },
+        methods: {
+            notifyParent() {
+                this.$emit('update-price')
+            },
         },
     }
 </script>

@@ -1,22 +1,22 @@
 <template>
     <div class="form-group">
         <label for="amount">Amount</label>
-        <input id="amount" class="form-control" type="number" min=100 max=1000 step=100 v-model="amount">
+        <input id="amount" class="form-control" type="number" min=10 max=100 step=10 :value="newAmount" @input="updateParent">
     </div>
 </template>
 
 <script>
     export default {
         name: 'CardChooseAmount',
-        props: [],
-        data() {
-            return {
-                amount: 100,
-            }
+        model: {
+            prop: 'newAmount',
+            event: 'input-changed'
+        },
+        props: ['newAmount'],
+        methods: {
+            updateParent(e) {
+                this.$emit('input-changed', parseInt(e.target.value))
+            },
         },
     }
 </script>
-
-<style lang="less" scoped>
-
-</style>

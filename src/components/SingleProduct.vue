@@ -8,14 +8,14 @@
         
         <div class="row">
             <div class="col-md-6">
-                <CardChooseShape />
-                <CardChoosePapersize />
-                <CardChooseAmount />
-                <CardChoosePaperquality />
+                <CardChooseShape v-model="config.shape" @input-changed="updateParent" />
+                <CardChoosePapersize v-model="config.size" @input-changed="updateParent" />
+                <CardChooseAmount v-model="config.amount" @input-changed="updateParent"/>
+                <CardChoosePaperquality v-model="config.quality" @input-changed="updateParent" />
             </div>
             <div class="col-md-6">
-                <CardChooseHeadline />
-                <CardChooseMaintext />
+                <CardChooseHeadline v-model="config.heading" @input-changed="updateParent" />
+                <CardChooseMaintext v-model="config.body" @input-changed="updateParent" />
 
                 <button class="btn-link pull-right">Clear configuration</button>
             </div>
@@ -41,7 +41,16 @@
             CardChooseHeadline,
             CardChooseMaintext,
         },
-        props: ['product'],
+        model: {
+            prop: 'config',
+        },
+        props: ['config'],
+        computed: {},
+        methods: {
+            updateParent() {
+                this.$emit('product-updated')
+            }
+        },
     }
 </script>
 

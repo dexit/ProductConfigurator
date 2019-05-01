@@ -12,7 +12,10 @@
                     Simply configure multiple cards by adding another!
                 </p>
 
-                <ProductList :products="products"/>
+                <ProductList 
+                    :products="products"
+                    @update-price="updatePrice"
+                />
                 
                 <div class="row">
                     <div class="col-md-6">
@@ -49,10 +52,13 @@
         methods: {
             ...mapActions('configurator', [
                 'addProduct',
-                'removeProduct'
+                'removeProduct',
+                'updatePrice'
             ])
         },
-        mounted() {},
+        mounted() {
+            this.updatePrice()
+        },
     }
 </script>
 

@@ -3,15 +3,17 @@ const state = {
     products: [
         {
             id: uuidv4(),
-            heading: '',
-            body: '',
-            amount: 5,
-            shape: 'rect', // other options: 'portrait'/'landscape'
-            size: 'a4', // other options: 'a5'/'a6'
-            quality: 'normal' // other option 'extra'
+            config: {
+                heading: 'A fancy headline',
+                body: 'lorem ipsum amit set dolores. Help!',
+                amount: 20,
+                shape: 'portrait', // other options: 'portrait'/'landscape'
+                size: 'a5', // other options: 'a5'/'a6'
+                quality: 'extra' // other option 'extra'
+            },
         }
     ],
-    price: 10.0, // base price
+    price: 1.50, // base price
 }
 const actions = {
     addProduct({commit}) {
@@ -33,12 +35,14 @@ const mutations = {
     addProductMut(state) {
         state.products.push({
             id: uuidv4(),
-            heading: '',
-            body: '',
-            amount: 1,
-            shape: 'rect',
-            size: 'a4',
-            quality: 'normal'
+            config: {
+                heading: '',
+                body: '',
+                amount: 1,
+                shape: 'rect',
+                size: 'a4',
+                quality: 'normal',
+            }
         })
     },
     removeProductMut(state, index) {
@@ -60,15 +64,15 @@ export default {
     mutations,
 } 
 
-const productPrice = product => {
-    let price = 10.0
-    if (product.size === 'a5') {
-        price = 7.5
-    } else if (product.size === 'a6') {
-        price = 5.0
+const productPrice = ({config}) => {
+    let price = 1.50
+    if (config.size === 'a5') {
+        price = 1.0
+    } else if (config.size === 'a6') {
+        price = 0.75
     }
-    if (product.quality === 'extra') {
+    if (config.quality === 'extra') {
         price *= 1.25
     }
-    return price * product.amount
+    return price * config.amount
 }

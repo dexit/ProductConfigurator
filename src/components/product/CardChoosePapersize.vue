@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <label for="size">Papersize</label>
-        <select id="size" class="form-control" v-model="size">
+        <select id="size" class="form-control" :value="size" @change="chosen">
             <option value="a4">A4</option>
             <option value="a5">A5</option>
             <option value="a6">A6</option>
@@ -12,15 +12,16 @@
 <script>
     export default {
         name: 'CardChoosePapersize',
-        props: [],
-        data() {
-            return {
-                size: 'a4'
-            }
+        model: {
+            prop: 'size',
+            event: 'chosen'
+        },
+        props: ['size'],
+        methods: {
+            chosen(e) {
+                console.log('new size selected: ', e.target.value)
+                this.$emit('chosen', e.target.value)
+            },
         },
     }
 </script>
-
-<style lang="less" scoped>
-
-</style>
