@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="page-header">
                     <h1>Super cool personal postcard configurator</h1>
                 </div>
@@ -20,7 +20,7 @@
                     @add-product="addProduct"
                 />
                 
-                <div class="row">
+                <footer class="row">
                     <div class="col-md-6">
                         <PriceContainer :price="price"/>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         <ProceedToCheckoutButton />
                     </div>
-                </div>
+                </footer>
             </div>
         </div>
     </div>
@@ -79,6 +79,10 @@ h1 {
 .form-control {
     border-radius: 0;
     background: #eee;
+}
+
+footer {
+    margin-bottom: 100px;
 }
 
 /* Custom radiobuttons and checkboxes */

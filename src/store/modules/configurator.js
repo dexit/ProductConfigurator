@@ -6,10 +6,10 @@ const state = {
             config: {
                 heading: 'A fancy headline',
                 body: 'lorem ipsum amit set dolores. Help!',
-                amount: 20,
-                shape: 'portrait', // other options: 'portrait'/'landscape'
-                size: 'a5', // other options: 'a5'/'a6'
-                quality: 'extra' // other option 'extra'
+                amount: 10,
+                shape: 'portrait', // options: 'rect', 'diamond', 'circle', portrait' or 'landscape'
+                size: 'a4', // other options: 'a5'/'a6'
+                quality: 'normal' // other option 'extra'
             },
         }
     ],
@@ -85,7 +85,7 @@ const createNewProduct = () => ({
         heading: '',
         body:  Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
         amount: 10,
-        shape: 'rect',
+        shape: 'square',
         size: 'a4',
         quality: 'normal',
     }

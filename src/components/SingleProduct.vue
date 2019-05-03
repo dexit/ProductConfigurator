@@ -8,7 +8,7 @@
         
         <div class="row">
             <div class="col-md-6">
-                <CardChooseShape v-model="config.shape" @changed="updateParent" />
+                <CardChooseShape v-model="config.shape" @changed="updateParent" :id="id"/>
                 <CardChoosePapersize v-model="config.size" @chosen="updateParent" />
                 <CardChooseAmount v-model="config.amount" @input-changed="updateParent"/>
                 <CardChoosePaperquality v-model="config.quality" @chosen="updateParent" :id="id"/>
