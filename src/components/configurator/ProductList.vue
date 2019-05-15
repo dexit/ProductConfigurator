@@ -5,8 +5,8 @@
                 <SingleProduct 
                     v-for="product in products" 
                     :key="product.id" 
-                    v-model="product.config"
                     :id="product.id" 
+                    v-model="product.config"
                     @product-updated="notifyParent"
                     @reset-product="resetProduct"
                     @remove-product="removeProduct"
