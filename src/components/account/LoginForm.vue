@@ -38,7 +38,7 @@
                 }
             },
             logout() {
-                this.$emit('logout-user')
+                this.$emit('logout')
             }
         },
     }

@@ -14,7 +14,7 @@
                     <LoginForm 
                         :auth="auth"
                         @login="attemptLogin"
-                        @logout-user="logout"
+                        @logout="logout"
                     />
                 </div>
             </div>
