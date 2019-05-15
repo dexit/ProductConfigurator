@@ -2,9 +2,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="page-header">
-                    <h1>Super cool personal postcard configurator</h1>
-                </div>
                 <p>
                     Use the configurator below to create your own stunning postcard. Just choose the card’s shape and paper size. Add your headline and main text and we’ll take care of the rest. The price will automatically adjust during your configuration.
                     <br>
@@ -68,8 +65,8 @@
 
 <style lang="less">
 @orange: #FF9900;
-h1 {
-    color: @orange;
+p {
+    padding: 10px 30px 20px;
 }
 
 .form-group {

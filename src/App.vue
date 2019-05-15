@@ -1,12 +1,19 @@
 <template>
-  <PostCardConfigurator id="app"/>
+  <div id="app">
+    <AccountNav />
+    <PostCardConfigurator/>
+  </div>
 </template>
 
 <script>
-import PostCardConfigurator from './components/PostCardConfigurator'
+import PostCardConfigurator from './components/configurator/PostCardConfigurator'
+import AccountNav from './components/account/AccountNav'
 export default {
   name: 'app',
-  components: {PostCardConfigurator},
+  components: {
+    PostCardConfigurator, 
+    AccountNav
+  },
 }
 </script>
 
