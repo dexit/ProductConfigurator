@@ -13,7 +13,7 @@ Setup of the project. We use @vue/cli with Vuex. No routing or other packages ar
 
 ## Part 3
 
-Full implementation of the product configurator with login. The store defined in part 2 is connected to the frontend. Currently drafting the blog post that describes all components in detail.
+Full implementation of the product configurator with login. The store defined in part 2 is connected to the frontend. You can read the associated blog post on [Medium](https://medium.com/@pimhooghiemstra/creating-a-product-configurator-with-vue-3-a87985cccaa4).
 
 ## Project setup
 ```
